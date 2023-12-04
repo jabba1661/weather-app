@@ -89,6 +89,8 @@ h1{
   top: 50%;
   transform-origin: 0 0;
   transform: rotate(270deg);
+  /* font-size: 4rem; */
+  /* height: 12rem; */
   /* border: black solid 2px;  */
 }
 

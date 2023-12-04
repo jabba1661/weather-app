@@ -20,32 +20,24 @@ function App() {
   const searchLocation = (event) => {
     if( event.key === 'Enter'){
 
-      console.log( `REACT_APP_OPENWEATHER_API_KEY: ${process.env.REACT_APP_OPENWEATHER_API_KEY}`);
-      // <p>this is an env variable: {process.env.REACT_APP_OPENWEATHER_API_KEY}</p>
       
-      
-      // const urlLocation = `https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=ace169a15680d1dde5416508dd0789fc`;
       const urlLocation = `https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`;
-      console.log( `City: ${location} | urlLocation: ..${urlLocation}..`);
-
+      // console.log( `City: ${location} | urlLocation: ..${urlLocation}..`);
+      console.log( `City: ${location}`);
       axios.get(urlLocation).then( (response) => {
       
         try {
-
-          console.log( response);
-          console.log( response.data );
-          if( response.data )
-          console.log(`-----------------------------`)
-
+          // console.log( response);
+          // console.log( response.data );
           var coords = formatcoords( response.data[0].lat, response.data[0].lon);
           var str = coords.format('DD MM ss X',{latLonSeparator: ', ',  decimalPlaces: 0});
           var [ latStr, lonStr ] = str.split( ",").map( el => el.trim());
           
           setLat( latStr ) ;
           setLon( lonStr ) ;
-          
+          console.log(`${str}\nLat:${response.data[0].lat}, Lon=${response.data[0].lon}`);
           const urlLatAndLonToWeatherInfo = `https://api.openweathermap.org/data/2.5/weather?lat=${response.data[0].lat}&lon=${response.data[0].lon}&units=imperial&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`;
-          console.log( `urlLatAndLonToWeatherInfo: ${urlLatAndLonToWeatherInfo}`);
+          // console.log( `urlLatAndLonToWeatherInfo: ${urlLatAndLonToWeatherInfo}`);
           
           
           axios.get(urlLatAndLonToWeatherInfo).then( (response) => {
