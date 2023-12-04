@@ -19,7 +19,13 @@ function App() {
 
   const searchLocation = (event) => {
     if( event.key === 'Enter'){
-      const urlLocation = `https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=ace169a15680d1dde5416508dd0789fc`;
+
+      console.log( `REACT_APP_OPENWEATHER_API_KEY: ${process.env.REACT_APP_OPENWEATHER_API_KEY}`);
+      // <p>this is an env variable: {process.env.REACT_APP_OPENWEATHER_API_KEY}</p>
+      
+      
+      // const urlLocation = `https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=ace169a15680d1dde5416508dd0789fc`;
+      const urlLocation = `https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`;
       console.log( `City: ${location} | urlLocation: ..${urlLocation}..`);
 
       axios.get(urlLocation).then( (response) => {
@@ -29,7 +35,6 @@ function App() {
           console.log( response);
           console.log( response.data );
           if( response.data )
-            console.log( "yes!");
           console.log(`-----------------------------`)
 
           var coords = formatcoords( response.data[0].lat, response.data[0].lon);
@@ -39,7 +44,7 @@ function App() {
           setLat( latStr ) ;
           setLon( lonStr ) ;
           
-          const urlLatAndLonToWeatherInfo = `https://api.openweathermap.org/data/2.5/weather?lat=${response.data[0].lat}&lon=${response.data[0].lon}&units=imperial&appid=ace169a15680d1dde5416508dd0789fc`;
+          const urlLatAndLonToWeatherInfo = `https://api.openweathermap.org/data/2.5/weather?lat=${response.data[0].lat}&lon=${response.data[0].lon}&units=imperial&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`;
           console.log( `urlLatAndLonToWeatherInfo: ${urlLatAndLonToWeatherInfo}`);
           
           
